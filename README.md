@@ -20,7 +20,7 @@ python get-pip.py
 pip -V
 ```
 # 2. Clone the project
-* Make sure you have git installer by checking its version:
+* Make sure you have git installed by checking its version:
 ```
 git --version 
 ```
