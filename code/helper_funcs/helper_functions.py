@@ -31,7 +31,7 @@ def test_model_w_images(model, TEST_DIR):
     plt.imshow(img) 
     img = np.array(img) / 255.
     img = img.reshape((1, IMAGE_SIZE, IMAGE_SIZE, 3))
-    print(img.shape)
+    #print(img.shape)
     img = datagen.standardize(img) 
     prediction = np.array(model.predict(img))
     actual = test_image.split('_')[0]
