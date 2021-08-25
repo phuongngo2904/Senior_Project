@@ -48,3 +48,4 @@ pip install -r requirements.txt
 cd code
 python real_time_detection.py
 ```
+* Dataset: https://www.kaggle.com/grassknoted/asl-alphabet
