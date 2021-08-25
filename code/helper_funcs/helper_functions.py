@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
-import random,os,cv2
+import random,os,cv2,np
 
 def view_random_image(target_dir, target_class):
   # Set up the target directory.
