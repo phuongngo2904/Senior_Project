@@ -2,3 +2,4 @@ tensorflow==2.6.0
 numpy
 mega.py
 opencv-python
+keras
