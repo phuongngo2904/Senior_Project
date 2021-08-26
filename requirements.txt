@@ -1,5 +1,5 @@
-tensorflow==2.6.0
-numpy
+tensorflow==2.4.1
+numpy==1.19.5
 mega.py
 opencv-python
-keras
+keras==2.6.0
