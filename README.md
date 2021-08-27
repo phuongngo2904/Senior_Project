@@ -43,7 +43,7 @@ cd Senior_Project
 ```
 pip install -r requirements.txt
 ```
-# 4. Run the real time regconition
+# 4. Run the real time recognition
 ```
 cd code
 python real_time_detection.py
