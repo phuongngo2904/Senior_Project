@@ -2,6 +2,10 @@ import numpy as np
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import cv2,os
 import tensorflow as tf
+# from text_to_speech import tts
+# from google.cloud import texttospeech
+# from pygame import mixer  # Load the popular external library
+
 
 if os.path.exists('gesture_regconition_model_4.h5'):
     print("Trained model already exists....\n"
