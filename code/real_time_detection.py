@@ -54,7 +54,14 @@ while True:
     resized_frame = cv2.resize(cropped_image, (IMAGE_SIZE, IMAGE_SIZE))
     reshaped_frame = (np.array(resized_frame)).reshape((1, IMAGE_SIZE, IMAGE_SIZE, 3))
     frame_for_model = datagen.standardize(np.float64(reshaped_frame))
-
+    
+    cv2.putText(frame, "Place your left hand here",
+                (5, 400), cv2.FONT_HERSHEY_TRIPLEX, 1, (0, 0, 0), 2, cv2.FILLED)
+    
+    # Create a blackboard to display predited text
+    blackboard = np.zeros(frame.shape, dtype=np.uint8)
+    cv2.putText(blackboard, "Hand Gestures to Text", (30, 40), cv2.FONT_HERSHEY_TRIPLEX, 1, (255, 255, 255))
+    
     # Predicting the frame.
     prediction = np.array(model.predict(frame_for_model))
     predicted_class = labels[prediction.argmax()]  # Selecting the max confidence index.
@@ -62,17 +69,15 @@ while True:
     # Preparing output based on the model's confidence.
     prediction_probability = prediction[0, prediction.argmax()]
     if prediction_probability > 0.5:
-        # High pred probability
-        cv2.putText(frame, '{} - {:.2f}%'.format(predicted_class, prediction_probability * 100),
-                    (5, 400), cv2.FONT_ITALIC, 2, (0, 0, 0), 2, cv2.FILLED)
+        # High pred prob.
+        cv2.putText(blackboard, '{} - {:.2f}%'.format(predicted_class, prediction_probability * 100),
+                    (30, 100), cv2.FONT_HERSHEY_TRIPLEX, 1, (255, 255, 255))
     elif prediction_probability > 0.2 and prediction_probability <= 0.5:
-        # Low pred probability
-        cv2.putText(frame, 'Maybe {}... - {:.2f}%'.format(predicted_class, prediction_probability * 100),
-                    (5, 400), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 255), 2, cv2.FILLED)
-    else:
-        #####
-        cv2.putText(frame, labels[-2], (10, 450), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 255, 0), 1, cv2.LINE_AA)
-    cv2.imshow('frame', frame)
+        # Low pred prob.
+        cv2.putText(blackboard, 'Maybe {}... - {:.2f}%'.format(predicted_class, prediction_probability * 100),
+                    (30, 100), cv2.FONT_HERSHEY_TRIPLEX, 1, (255, 255, 255))
+    res = np.hstack((frame, blackboard))
+    cv2.imshow("Camera", res)
 
     interrupt = cv2.waitKey(10)
     if interrupt & 0xFF == 27:  # esc key
