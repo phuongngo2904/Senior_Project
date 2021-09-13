@@ -30,7 +30,7 @@ datagen = ImageDataGenerator(rescale=1/255.,
 model = tf.keras.models.load_model('gesture_regconition_model_4.h5')
 labels = ['A','B','C','D','E','F','G','H','I','J','K','L','M',
           'N','O','P','Q','R','S','T','U','V','W','X','Y','Z','del','nothing','space']
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0) # agrument 0 meaning internal camera, when using Rasberry Pi Cam, the argument should be different
 x1,y1 = 5,5
 x2,y2 = 330,330
 IMAGE_SIZE = 64
