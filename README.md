@@ -2,7 +2,6 @@
 
 # 1. Install pip, python, virtualenv on RaspberryPi OS
 
-```
 ### If you already installed python(any versions), please ignore this step:
 ```
 sudo apt-get install python3
