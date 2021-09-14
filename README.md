@@ -27,6 +27,7 @@ pip install virtualenv
 * Create a directory to store env
 ```
 mkdir environtments
+cd environments
 ```
 * Create a virtual environment
 ```
