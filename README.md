@@ -13,18 +13,18 @@ python --version
 ```
 ### If you already installed python(any versions), please ignore this step:
 ```
-sudo apt install python3.7
+sudo apt-get install python3
 ```
 * Then, verify Installation and check pip and python version:
 ```
-python --version
-pip -V
+python3 --version
+pip3 -V
 
 ```
 ### Install virtual environtment
 * Install virtualenv
 ```
-sudo pip install virtualenv==20.4.7
+sudo pip3 install virtualenv==20.4.7
 ```
 * Create a directory to store env
 ```
@@ -66,12 +66,12 @@ cd Senior_Project
 ```
 # 3.  Install requirements
 ```
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 # 4. Run the real time recognition
 ```
 cd code
-python real_time_detection.py
+python3 real_time_detection.py
 ```
 # Reference 
 * Dataset: https://www.kaggle.com/grassknoted/asl-alphabet
