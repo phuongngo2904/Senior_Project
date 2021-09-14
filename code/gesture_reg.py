@@ -112,6 +112,7 @@ class gesture_regcognize():
             # We can replace interrupt key by a button
             if interrupt & 0xFF == 27:  # esc key: abort the program
                 break
+            if interrupt == ord('d'): self.predicted_string = self.predicted_string[:-1] # delete the latest character
             if interrupt == ord('c'): self.key_pressed = True # press 'c' to start
             if interrupt == ord('s'): self.activate_text_to_speech=True # run the text to speech
             if interrupt == ord('r'): self.predicted_string = ""  # reset the entire string
