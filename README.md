@@ -1,6 +1,6 @@
 # Senior Project - Sign Language Translator
 
-# 1. Install pip, python, virtualenv
+# 1. Install pip, python, virtualenv on RaspberryPi OS
 * Make sure you already have pip and python installed in your computer<br />
 
 ### Checking pip if exists:
@@ -11,18 +11,20 @@ pip -V
 ```
 python --version
 ```
-### If you already installed pip, please ignore this step:
+### If you already installed python(any version), please ignore this step:
 ```
-python get-pip.py
+sudo apt install python3.7
 ```
-* Then, verify Installation and check the Pip Version:
+* Then, verify Installation and check pip and python version:
 ```
+python --version
 pip -V
+
 ```
 ### Install virtual environtment
 * Install virtualenv
 ```
-pip install virtualenv
+sudo pip install virtualenv==20.4.7
 ```
 * Create a directory to store env
 ```
@@ -35,7 +37,12 @@ virtualenv senior
 ```
 * Activate virtual environment
 ```
-senior\Scripts\activate
+cd senior
+source bin/activate
+```
+* Then go back to the root
+```
+cd 
 ```
 # 2. Clone the project
 * Make sure you have git installed by checking its version:
