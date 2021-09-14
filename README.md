@@ -1,6 +1,6 @@
 # Senior Project - Sign Language Translator
 
-# 1. Install pip and python
+# 1. Install pip, python, virtualenv
 * Make sure you already have pip and python installed in your computer<br />
 
 ### Checking pip if exists:
@@ -18,6 +18,23 @@ python get-pip.py
 * Then, verify Installation and check the Pip Version:
 ```
 pip -V
+```
+### Install virtual environtment
+* Install virtualenv
+```
+pip install virtualenv
+```
+* Create a directory to store env
+```
+mkdir environtments
+```
+* Create a virtual environment
+```
+virtualenv senior
+```
+* Activate virtual environment
+```
+senior\Scripts\activate
 ```
 # 2. Clone the project
 * Make sure you have git installed by checking its version:
