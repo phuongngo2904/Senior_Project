@@ -11,7 +11,7 @@ pip -V
 ```
 python --version
 ```
-### If you already installed python(any version), please ignore this step:
+### If you already installed python(any versions), please ignore this step:
 ```
 sudo apt install python3.7
 ```
