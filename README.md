@@ -1,15 +1,7 @@
 # Senior Project - Sign Language Translator
 
 # 1. Install pip, python, virtualenv on RaspberryPi OS
-* Make sure you already have pip and python installed in your computer<br />
 
-### Checking pip if exists:
-```
-pip -V
-```
-### Checking python  if exists:
-```
-python --version
 ```
 ### If you already installed python(any versions), please ignore this step:
 ```
@@ -24,7 +16,7 @@ pip3 -V
 ### Install virtual environtment
 * Install virtualenv
 ```
-sudo pip3 install virtualenv==20.4.7
+sudo pip3 install virtualenv
 ```
 * Create a directory to store env
 ```
