@@ -68,9 +68,9 @@ sudo apt update
 sudo apt dist-upgrade
 sudo apt clean
 ```
-* Upgrade pip (>19.0), setuptools (≥41.0.0) and install Tensorflow 2 dependencies.
-If you use virtual environtment, in the cmd line 'pip3 install -U --user six wheel mock'
-you can ignore the '--user'. You can run this cmd line instead: 'pip3 install -U six wheel mock'
+* Upgrade pip (>19.0), setuptools (≥41.0.0) and install Tensorflow 2 dependencies.<br />
+If you use virtual environtment, in the cmd line 'pip3 install -U --user six wheel mock'<br />
+you can ignore the '--user'. You can run this cmd line instead: 'pip3 install -U six wheel mock'<br />
 ```
 sudo pip install --upgrade pip
 sudo pip3 install --upgrade setuptools
