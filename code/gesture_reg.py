@@ -116,5 +116,8 @@ class gesture_regcognize():
             if interrupt == ord('c'): self.key_pressed = True # press 'c' to start
             if interrupt == ord('s'): self.activate_text_to_speech=True # run the text to speech
             if interrupt == ord('r'): self.predicted_string = ""  # reset the entire string
+            if interrupt == ord('v'): 
+                self.key_pressed = False # press 'v' to stop the prediction
+                self.predicted_string = ""
         cap.release()
         cv2.destroyAllWindows()
