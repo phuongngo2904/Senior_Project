@@ -74,7 +74,7 @@ class gesture_regcognize():
             # Predicting the frame.
             #self.predicted_text, self.predicted_prob = self.predict_function(model)
 
-            if self.timer > 20 and self.predicted_text not in self.labels[26:-1]:
+            if self.timer > 100 and self.predicted_text not in self.labels[26:-1]:
                 if self.predicted_text == 'space':
                     self.predicted_string += " "
                 else: self.predicted_string += self.predicted_text
