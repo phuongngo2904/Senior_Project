@@ -20,7 +20,7 @@ sudo pip3 install virtualenv
 * Create a directory to store env
 ```
 mkdir environtments
-cd environments
+cd environtments
 ```
 * Create a virtual environment
 ```
