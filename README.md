@@ -108,3 +108,4 @@ python3 real_time_detection.py
 ```
 # Reference 
 * Dataset: https://www.kaggle.com/grassknoted/asl-alphabet
+* TFLite model : https://mega.nz/file/WQdAjZZL#IhPKLt4sYcpWtQXMIVQQrDNhF7UvPOF0lv2e5wXAjlc
