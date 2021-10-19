@@ -21,6 +21,8 @@ def text_to_speech(text):
   engine.setProperty('rate',150)
   engine.say(text)
   engine.runAndWait()
+ 
+
 def load_labels():
   labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
                        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'del', 'nothing', 'space']
@@ -78,7 +80,12 @@ def main():
           
         if(GPIO.input(18) == False): activate_prediction = True
         if(GPIO.input(24) == False): activate_text_to_speech = True
-        if(GPIO.input(12) == False): activate_prediction = False
+        if(GPIO.input(12) == False):
+            activate_prediction = False
+            previous_text = ""
+            predicted_string = ""
+            predicted_text = ""
+            timer = 0
         stream.seek(0)       
         image = Image.open(stream).convert('RGB').resize((width, height),
                                                    Image.ANTIALIAS)
