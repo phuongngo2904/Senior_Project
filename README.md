@@ -104,8 +104,8 @@ pip3 install -r requirements.txt
 # 5. Run the real time recognition
 ```
 cd code
-python3 real_time_detection.py
+cd recognition_RASP_OS
+python3 pi_cam.py
 ```
 # Reference 
 * Dataset: https://www.kaggle.com/grassknoted/asl-alphabet
-* TFLite model : https://mega.nz/file/WQdAjZZL#IhPKLt4sYcpWtQXMIVQQrDNhF7UvPOF0lv2e5wXAjlc
