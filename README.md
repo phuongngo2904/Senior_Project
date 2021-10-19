@@ -100,6 +100,7 @@ sudo -H pip3 install tensorflow-2.5.0-cp37-none-linux_armv7l.whl
 # 4.  Install requirements
 ```
 pip3 install -r requirements.txt
+sudo apt-get install espeak
 ```
 # 5. Run the real time recognition
 ```
