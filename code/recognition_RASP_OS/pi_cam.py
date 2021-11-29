@@ -4,15 +4,27 @@ from __future__ import print_function
 import RPi.GPIO as GPIO
 import cv2, pyttsx3, argparse, io, os, picamera
 import numpy as np
+import speech_recognition as sr
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from PIL import Image
 from tflite_runtime.interpreter import Interpreter
 
 def set_up_buttons():
   GPIO.setmode(GPIO.BCM)
-  GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP) # acitvate_prediction
-  GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_UP) # activate_text_to_speech
-  GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_UP) # delete the latest character recenlty added to the string
+  GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP) # acitvate_prediction
+  GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_UP) # activate_text_to_speech
+  GPIO.setup(27, GPIO.IN, pull_up_down=GPIO.PUD_UP) # delete the latest character recenlty added to the string
+  GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP) # activate speech_to_text  
+def speech_to_text(r, mic):
+    
+    with mic as source:
+        r.adjust_for_ambient_noise(source)
+        audio = r.listen(source)
+    try:
+        text = r.recognize_google(audio)
+    except:
+        return "There was an error! Please try again."
+    return text
 
 def text_to_speech(text):
   engine = pyttsx3.init()
@@ -21,8 +33,6 @@ def text_to_speech(text):
   engine.setProperty('rate',150)
   engine.say(text)
   engine.runAndWait()
- 
-
 def load_labels():
   labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
                        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'del', 'nothing', 'space']
@@ -53,6 +63,7 @@ def classify_image(interpreter, image, top_k=1):
 
 def main():
 
+
   labels = load_labels()
 
   interpreter = Interpreter(model_path="model.tflite")
@@ -68,8 +79,12 @@ def main():
   predicted_string = ""
   predicted_text = ""
   timer = 0
-  activate_prediction = False # pin18
-  activate_text_to_speech = False #pin 24
+  #sets up microphone
+  r = sr.Recognizer()
+  mic = sr.Microphone(device_index=2)
+  activate_prediction = False # pin17
+  activate_text_to_speech = False # pin 16
+  activate_speech_to_text = False # pin 23
   with picamera.PiCamera(resolution=(640, 480), framerate=40) as camera:
     camera.start_preview(fullscreen=False,window=(110,20,640,480))
     camera.vflip =True
@@ -78,19 +93,36 @@ def main():
       for _ in camera.capture_continuous(
           stream, format='jpeg', use_video_port=True):
           
-        if(GPIO.input(18) == False): activate_prediction = True
-        if(GPIO.input(24) == False): activate_text_to_speech = True
-        if(GPIO.input(12) == False):
+        #button  
+        if(GPIO.input(17) == False): activate_prediction = True
+        #joystick select
+        if(GPIO.input(16) == False): activate_text_to_speech = True
+        #joystick select
+        if(GPIO.input(23) == False): activate_speech_to_text = True
+        #joystick down
+        if(GPIO.input(27) == False): #stop the prediction
             activate_prediction = False
             previous_text = ""
             predicted_string = ""
             predicted_text = ""
             timer = 0
+            camera.annotate_text = '%s\n\n\n%s %.2f' % (predicted_string,labels[label_id], prob*100)
         stream.seek(0)       
         image = Image.open(stream).convert('RGB').resize((width, height),
                                                    Image.ANTIALIAS)
         image = datagen.standardize(np.float64(image))
-        
+        if activate_text_to_speech:
+            text_to_speech(predicted_string)
+            activate_text_to_speech=False
+            previous_text = ""
+            predicted_string = ""
+            predicted_text = ""
+            timer = 0
+            camera.annotate_text = '%s\n\n\n%s %.2f' % (predicted_string,labels[label_id], prob*100)
+        if activate_speech_to_text:
+            activate_speech_to_text = False
+            camera.annotate_text = '%s' % ("SPEECH TO TEXT MODE")
+            camera.annotate_text = '%s' % (speech_to_text(r, mic))
         if timer > 10 and predicted_text not in labels[26:-1]:
             if predicted_text== "space":
                 predicted_string += " "
@@ -109,9 +141,7 @@ def main():
             else: timer = 0
             print(f"TIMER IS {timer}")
             camera.annotate_text = '%s\n\n\n%s %.2f' % (predicted_string,labels[label_id], prob*100)
-        if activate_text_to_speech:
-            text_to_speech(predicted_string)
-            activate_text_to_speech=False            
+       
     finally:
         camera.stop_preview()
         
@@ -129,3 +159,4 @@ if __name__ == '__main__':
       except PermissionError:
           print("Ignore permission error and download the model")
   main()
+  #text_to_speech("Hello")
