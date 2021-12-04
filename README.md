@@ -110,4 +110,5 @@ python3 pi_cam.py
 ```
 # Reference 
 * Dataset: https://www.kaggle.com/grassknoted/asl-alphabet
-* Demo: https://youtu.be/1r5bvGSeeLc
+* Demo (real time recognition): https://youtu.be/1r5bvGSeeLc
+* Demo (speech to text feature): https://youtu.be/j8Hz8Bf_bsQ
